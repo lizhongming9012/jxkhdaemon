@@ -1,0 +1,4 @@
+
+section,nav,figure,menu,header, section, footer, aside, article, figure {
+	display: block;
+}

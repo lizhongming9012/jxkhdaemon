@@ -1,0 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?> 
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> 
+	<container-descriptor> 
+	<prefer-web-inf-classes>true</prefer-web-inf-classes> 
+	<show-archived-real-path-enabled>true</show-archived-real-path-enabled> 
+	</container-descriptor> </weblogic-web-app> 
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app xmlns:wls="http://www.bea.com/ns/weblogic/weblogic-web-app"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://www.bea.com/ns/weblogic/weblogic-web-app http://www.bea.com/ns/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd">
+	<wls:weblogic-version>10.3</wls:weblogic-version>
+	<wls:context-root>npt</wls:context-root>
+	<wls:jsp-descriptor>
+		<wls:keepgenerated>true</wls:keepgenerated>
+		<wls:working-dir>d:\weblogic_10.3_jsp_servlet_java</wls:working-dir>
+	</wls:jsp-descriptor>	
+</wls:weblogic-web-app>-->
+
+
+

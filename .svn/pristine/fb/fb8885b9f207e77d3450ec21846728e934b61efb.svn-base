@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>OA首页</title>
+
+</head>
+
+<body>
+	<link href="css/base.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
+	<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.datePicker-min.js"></script>
+	<link type="text/css" href="css/datePicker.css" rel="stylesheet" />
+	<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+
+	<section class="container content">
+		<aside class="aside-left">
+			<article class="model-base">
+				<div class="model-ver-title">
+					<i>工作通知</i>
+				</div>
+				<div class="model-panel">
+					<div class="search">
+						<input name="search-put" type="input"
+							class="base-form search-input"><input type="button"
+							name="" value="" class="base-form serch-btn"><a href=""
+							class="base-form fb-btn"></a>
+					</div>
+					<ul class="notice-item">
+					</ul>
+					<p class="more">
+						<a href="" class="more-btn">more</a>
+					</p>
+				</div>
+				<div class="clearfix"></div>
+			</article>
+			<div class="clear-height40"></div>
+			<article style=" height:300px;">
+				<aside class="aside-left" style="border-radius:8px;">
+					<article class="model-base">
+						<div class="model-zqrl-title">
+							<span class="dbrq-l"></span>日历<span class="dbrq-r"></span>
+						</div>
+						<div class="datepicker"></div>
+
+					</article>
+				</aside>
+				<aside class="aside-right" style="border-radius:8px;">
+					<article class="model-base"
+						style=" padding-bottom:1px;border-radius:8px 8px 2px 2px">
+						<div class="model-cross-title pos-item">
+							<i>待办事宜</i><span class="edit-btn"><a href=""></a> </span>
+						</div>
+
+						<div class="clear-height10"></div>
+						<p class="more">
+							<a href="" class="more-btn">more</a>
+						</p>
+						<div class="clearfix"></div>
+					</article>
+				</aside>
+			</article>
+		</aside>
+
+		<aside class="aside-right">
+			<article class="model-base" style=" padding-bottom:5px;">
+				<div class="model-cross-title">
+					<i>新邮件</i>
+				</div>
+				<p class="more">
+					<a href="" class="more-btn">more</a>
+				</p>
+				<div class="clearfix"></div>
+			</article>
+			<div class="clear-height40"></div>
+			<ul class="icon-item">
+				<li><a href=""><img src="images/icon1.png">
+						<div class="info">写邮件</div> </a></li>
+				<li><a href=""><img src="images/icon2.png">
+						<div class="info">收件箱</div> </a></li>
+				<li><a href=""><img src="images/icon3.png">
+						<div class="info">发件箱</div> </a></li>
+				<li><a href=""><img src="images/icon4.png">
+						<div class="info">垃圾箱</div> </a></li>
+			</ul>
+			<div class="clear-height40"></div>
+			<article class="model-base" style=" padding-bottom:5px;">
+				<div class="model-cross-title">
+					<i>快速链接</i>
+				</div>
+
+				<div class="clearfix"></div>
+			</article>
+		</aside>
+	</section>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$(".datepicker").datePicker({
+				inline : true,
+				selectMultiple : false
+			});
+
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为含有id中指示的方法的接口 -->
+<mapper namespace="org.jxkh.system.dao.SysDepartsDao">
+	<resultMap type="SysDeparts" id="sysDepartsMap">
+		<id column="ID" property="id" />
+		<result column="PARENT_ID" property="parentId" />
+		<result column="DEPT_NAME" property="deptName" />
+		<result column="DEPTSTANDALONE" property="deptstandalone" />
+		<result column="DEPT_DESC" property="deptDesc" />
+		<result column="DEPTSORT" property="deptsort" />
+	</resultMap>
+	
+	<resultMap type="java.lang.String" id="sysStringList">
+		<result column="PARENT_ID" property="parentId" />
+	</resultMap>
+
+	<select id="getChildByParentId" parameterType="String" resultMap="sysDepartsMap">
+	    SELECT * FROM SYS_DEPT WHERE PARENT_ID=#{parentId} ORDER BY ID	
+	</select>
+	
+	<select id="getParentId" resultMap="sysStringList">
+	    SELECT PARENT_ID FROM SYS_DEPT Group By PARENT_ID Order By PARENT_ID	
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,328 @@
+/* CSS Document */
+
+@charset "UTF-8";
+body {
+	font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+	background-color:#ccc;
+	margin: 0;
+	padding: 0;
+	color: #666666;
+}
+.main{
+	background-image:url(../wallimages/bg.jpg);
+	background-repeat:no-repeat;
+	background-position:center top;
+}
+/* ~~ 元素/标签选择器 ~~ */
+ul, ol, dl {
+	list-style:none;
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* 删除上边距可以解决边距会超出其包含的块的问题。剩余的下边距可以使块与后面的任何元素保持一定距离。 */
+	padding-right: 15px;
+	padding-left: 15px; /* 向块内的元素侧边（而不是块元素自身）添加填充可避免使用任何方框模型数学。此外，也可将具有侧边填充的嵌套块用作替代方法。 */
+	
+}
+
+a img { /* 此选择器将删除某些浏览器中显示在图像周围的默认蓝色边框（当该图像包含在链接中时） */
+	border: none;
+}
+/* ~~ 站点链接的样式必须保持此顺序，包括用于创建悬停效果的选择器组在内。 ~~ */
+a:link {
+	color: #666666;
+	text-decoration:none; /* 除非将链接设置成极为独特的外观样式，否则最好提供下划线，以便可从视觉上快速识别 */
+}
+a:visited {
+	color: #666666;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* 此组选择器将为键盘导航者提供与鼠标使用者相同的悬停体验。 */
+	color:#1369c0;
+	text-decoration: none;
+}
+/* ~~ 此固定宽度容器包含所有其它块 ~~ */
+.container{
+	width:1250px;
+	margin: 0 auto; /* 侧边的自动值与宽度结合使用，可以将布局居中对齐 */
+}
+
+.container:after{
+	clear:both;
+	display:table;
+}
+/* ~~ 标题未指定宽度。它将扩展到布局的完整宽度。 ~~ */
+header {
+	
+}
+header .header-bg{
+	background:#3990e1;
+	height:30px;
+	line-height:30px;
+}
+
+
+
+
+
+
+/*中间部分 start*/
+.aside-left{
+	float:left; 
+	width:48%;
+}
+.aside-right{
+	float:right; 
+	width:48%;
+}
+.model-base{
+	background-color:#fff;
+	border:none;
+	border-radius:8px;
+}
+.model-base .model-ver-title{
+	width:40px;
+	height:100%;
+	display:block;
+	float:left;
+	background-color:#398fca;
+	border-radius:8px 0 0 8px;
+	font-size:16px;
+	font-weight:bold;
+	color:#FFF;
+	text-align:center;
+}
+.model-base .model-ver-title i{
+	font-style:normal;
+	display:block;
+	margin:110px 6px;
+}
+
+.model-base .model-cross-title{
+	height:40px;
+	line-height:40px;
+	display:block;
+	background-color:#398fca;
+	border-radius:8px 8px 0 0;
+	font-size:16px;
+	font-weight:bold;
+	color:#FFF;
+	border-bottom:2px solid #2e72a2;
+	box-sizing:border-box;
+}
+.model-base .model-cross-title i{
+	font-style:normal;
+	display:block;
+	margin-left:20px;
+}
+.model-base .model-panel{
+	margin:0 15px 10px 55px;
+}
+.model-base .search{
+	padding:15px 15px 10px 15px;
+	text-align:right;
+	border-bottom:1px dotted #858585;
+}
+
+.model-base .base-form{
+	vertical-align:middle;
+	height:28px;
+	box-sizing:border-box;
+}
+.model-base .search-input{
+	width:260px;
+	background-color:#eeeeee;
+	border:#d9d9d9 1px solid;
+}
+.model-base .serch-btn{
+	border:none;
+	height:28px;
+	width:83px;
+	background:url(../wallimages/search-btn.jpg);
+}
+.model-base .fb-btn{
+	height:28px;
+	width:86px;
+	background:url(../wallimages/fb-btn.jpg);
+	display:inline-block;
+	margin-left:20px;
+}
+.model-base .notice-item{
+	margin:15px 0 10px 0;
+}
+.model-base .notice-item li{
+	list-style-type:square;
+	list-style-position:inside;
+	height:28px;
+	line-height:28px;
+	padding:0 8px;
+	position:relative;
+}
+
+.model-base .notice-item li:nth-child(odd){
+	background-color:#eeeeee;
+}
+.model-base .notice-item li span{
+	position:absolute;
+	top:0;
+	right:10px;
+}
+.model-base .more{
+	text-align:center;
+	color:#FFF;
+}
+.model-base .more-btn{
+	width:66px;
+	height:26px;
+	line-height:26px;
+	background-color:#ff8c11;
+	display:inline-block;
+	border-radius:5px;
+	box-shadow:0px 3px 2px #C63;
+	color:#FFF;
+}
+.email-item{
+	padding:0 20px;
+	margin-bottom:10px;
+}
+.email-item li{
+	padding-left:18px;
+	height:35px;
+	line-height:35px;
+	border-bottom:1px solid #d3d3d3;
+	background:url(../wallimages/dics.gif) no-repeat;
+	background-position:0 15px;
+	position:relative;
+}
+.email-item li span.time{
+	position:absolute;
+	top:0;
+	right:0;
+}
+.email-item li span:first-child{
+	font-weight:bold;
+	width:70px;
+	display:inline-table;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+.icon-item {
+	text-align:center;	
+}
+.icon-item li{
+	display:inline-block;
+	padding:0 20px;
+}
+
+.icon-item li a{
+	display: inline-block;
+}
+
+.link-item{
+	margin:0 12px;
+}
+.link-item li{
+	display:inline-block;
+	margin:10px 14px;
+	text-align:center;
+	vertical-align:top;
+}
+
+.link-item li img{
+	width:64px;
+	height:64px;
+}
+.pos-item{
+	position:relative;
+}
+.edit-btn{
+	position:absolute;
+	top:7px;
+	right:10px;
+}
+.edit-btn a{
+	display:block;
+	background:url(../wallimages/edit.png);
+	width:23px;
+	height:25px;
+}
+.dbsy-item thead td{
+	text-align:center;
+	background-color:#b2d9f4;
+	height:30px;
+}
+.dbsy-item tbody td{
+	height:30px;
+	border-bottom:1px dotted #CCCCCC;
+}
+.model-base .model-zqrl-title{
+	height:40px;
+	line-height:40px;
+	display:block;
+	background-color:#f24c46;
+	border-radius:8px 8px 0 0;
+	font-size:16px;
+	font-weight:bold;
+	color:#FFF;
+	text-align:center;
+	position:relative;
+	border-bottom:2px solid #c23d38;
+	box-sizing:border-box;
+}
+.model-base .dbrq-l{
+	background:url(../wallimages/dbrq-l.png);
+	width:54px;
+	height:40px;
+	position:absolute;
+	top:0;
+	left:0;border-bottom:2px solid #c23d38;
+	box-sizing:border-box;
+}
+.model-base .dbrq-r{
+	background:url(../wallimages/dbrq-r.png);
+	width:59px;
+	height:40px;
+	position:absolute;
+	top:0;
+	right:0;border-bottom:2px solid #c23d38;
+	box-sizing:border-box;
+}
+
+
+.clearfix{
+	clear:both;
+	height:0;
+}
+
+.clear-height{
+	clear:both;
+	height:0;
+}
+.clear-height15{
+	clear:both;
+	height:15px;
+}
+.clear-height10{
+	clear:both;
+	height:10px;
+}
+.clear-height20{
+	clear:both;
+	height:20px;
+}
+.clear-height40{
+	clear:both;
+	height:30px;
+}
+.ellipsis{
+	display:inline-block;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+
+.icon-item li{
+	display: inline;
+}

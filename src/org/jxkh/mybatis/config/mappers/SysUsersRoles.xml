@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为含有id中指示的方法的接口 -->
+<mapper namespace="org.jxkh.security.dao.SysUsersRolesDao">
+	
+	<resultMap type="SysUsersRoles" id="sysUsersRolesMap">
+		<id column="ID" property="id" />
+		<result column="ROLE_ID" property="roleId" />
+		<result column="USER_ID" property="userId" />
+		<result column="ENABLED" property="enabled" javaType="Boolean"
+			jdbcType="CHAR" />
+	</resultMap>
+	<!-- 给用户授予角色用，需要增加角色名称 -->
+		<resultMap type="SysUsersRoles" id="sysUsersRolesNameMap">
+		<id column="ID" property="id" />
+		<result column="ROLE_ID" property="roleId" />
+		<result column="USER_ID" property="userId" />
+		<result column="ENABLED" property="enabled"  />
+		<result column="ROLE_NAME" property="roleName" />
+		<result column="ROLE_DESC" property="roleDesc" />
+		</resultMap>
+	<select id="selectSysUsersRoles" parameterType="int" resultMap="sysUsersRolesMap">
+		select * from tongde.SYS_USERS_ROLES where ID = #{id}
+	</select>
+	<insert id="insertSysUsersRoles" parameterType="SysUsersRoles">
+		insert into
+		tongde.SYS_USERS_ROLES (ID, USER_ID,
+		ROLE_ID)
+		values (
+		#{id}, #{userId},
+		#{roleId} 
+		)
+	</insert>
+		<update id="updateSysUsersRoles" parameterType="SysUsersRoles">
+		update
+		tongde.SYS_USERS_ROLES set (ID, USER_ID,
+		ROLE_ID)
+		= (
+		#{id}, #{userId},
+		#{roleId}
+		)
+	</update >
+	<delete id="deleteSysUsersRoles" parameterType="int" >
+		delete from tongde.SYS_USERS_ROLES where ID = #{id}
+	</delete>
+		<select id="selectSysUsersRolesByUserId" parameterType="String" resultMap="sysUsersRolesNameMap">
+		select ur.ID,ur.USER_ID,ur.ROLE_ID,r.ROLE_NAME,r.ROLE_DESC
+		from tongde.SYS_USERS_ROLES ur  left join tongde.SYS_ROLES r
+		on ur.ROLE_ID = r.ROLE_ID		
+		where ur.USER_ID = #{userId}
+	</select>
+	
+</mapper>

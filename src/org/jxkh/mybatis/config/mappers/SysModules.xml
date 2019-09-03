@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为含有id中指示的方法的接口 -->
+<mapper namespace="org.jxkh.system.dao.SysModulesDao">
+
+	<resultMap type="SysModules" id="sysModulesMap">
+		<id column="MODULE_ID" property="moduleId" />
+		<result column="PARENT_ID" property="parentId" />
+		<result column="MODULE_NAME" property="moduleName" />
+		<result column="DISPINDEX" property="dispindex" />
+	</resultMap>
+	<resultMap type="java.lang.String" id="sysStringList">
+		<result column="PARENT_ID" property="parentId" />
+	</resultMap>
+	<select id="getChildByParentId" parameterType="String" resultMap="sysModulesMap">
+	    SELECT * FROM SYS_MODULES WHERE PARENT_ID=#{parentId} ORDER BY MODULE_ID	
+	</select>
+	<select id="getParentId" resultMap="sysStringList">
+	    SELECT PARENT_ID FROM SYS_MODULES Group By PARENT_ID Order By PARENT_ID	
+	</select>
+	<delete id="deleteNode" parameterType="String" >
+		delete from SYS_MODULES where module_id = #{moduleId}
+	</delete>
+	<insert id ="insertNode" parameterType="SysModules" useGeneratedKeys ="true"  keyColumn="MODULE_ID" keyProperty="moduleId">
+		insert into SYS_MODULES (PARENT_ID,MODULE_NAME) 
+		values(#{parentId},#{moduleName})
+	</insert>
+	<update id="updateNode" parameterType="SysModules">
+		update SYS_MODULES set MODULE_NAME=#{moduleName} where MODULE_ID=#{moduleId}
+	</update>
+</mapper>

@@ -1,0 +1,154 @@
+body {
+	font: 100%/1.2 '微软雅黑',Verdana, Arial, Helvetica, sans-serif;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+.mt10{
+	margin-top:10px;
+}
+.clearfix{
+	clear:both;
+}
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+a img {
+	border: none;
+}
+a:link {
+	color: #42413C;
+	text-decoration: none;
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus {
+	text-decoration: underline;
+}
+.container {
+	width: 980px;
+	margin: 0 auto;
+}
+
+header, section, footer, aside, article, figure {
+	display: block;
+}
+
+header{
+	height:230px;
+	background-image:url(../images/banner-bg.jpg);
+	background-repeat:repeat-x;
+}
+header .banner{
+	width:1005px;
+	margin:0 auto;
+	text-align:center;
+}
+
+.focus-box{
+	display:inline-block;
+	width:635px;
+	float:left;
+}
+.focus-text ul{
+	list-style:none;
+	margin:10px 0;;
+	padding:0;
+}
+.focus-text li{
+	margin-left:10px;
+	height:30px;
+	line-height:30px;
+}
+.focus-text li a{}
+
+.news-box{
+	display:inline-block;
+	width:340px;
+	float:right;
+}
+.news-item .title{
+	height:38px;
+	background:url(../images/new_bg.jpg) repeat-x left center;
+}
+.news-item .title .mbyq-icon{
+	background:url(../images/mbyq.jpg) no-repeat left center;	
+}
+.news-item .title .zdsx-icon{
+	background:url(../images/zdsx.jpg) no-repeat left center;
+}
+.news-item .title .ffbz-icon{
+	background:url(../images/ffbz.jpg) no-repeat left center;
+}
+.news-item .title h3{
+	display:inline-block;
+	width:130px;
+	height:38px;
+	margin:0;
+	padding:0;
+	text-indent:-9999px;
+	overflow:hidden;
+}
+.news-item .content{
+	padding:15px 15px 10px;
+	line-height:1.5;
+	color:#ff2625;
+}
+.news-item .content p{
+	line-height:1.8;
+}
+
+.list-item{}
+.list-item .title{
+	height:49px;
+	background:url(../images/list-title-bg.jpg) no-repeat center center;
+}
+.list-item h3{
+	margin:20px 0px 0 65px;
+	font-size:18px;
+	font-weight:bold;
+	color:#ebc439;
+}
+.list-item .item-box:nth-child(2n) h3{
+	margin-top:17px;	
+}
+.list-item .content{
+	background:url(../images/list-content-bg.jpg) repeat-y center top;
+}
+.list-item .item-box{
+	width:50%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	float:left;
+}
+.list-item .content ul{
+	margin:5px 15px 15px 30px;
+	list-style:none;
+	padding:0;
+}
+.list-item .content ul li{
+	padding-top:5px;
+	line-height:1.5;
+}
+.list-item .content .item-box{
+	min-height:220px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	behavior:url{res/js/util/ie-css3.htc};
+}
+
+footer{
+	padding:35px;
+	text-align:center;
+}

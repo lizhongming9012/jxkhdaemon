@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为含有id中指示的方法的接口 -->
+<mapper namespace="org.jxkh.security.dao.SysRolesDao">
+	
+	<resultMap type="SysRoles" id="sysRolesMap">
+		<id column="ROLE_ID" property="roleId" />
+		<result column="ROLE_NAME" property="roleName" />
+		<result column="ROLE_DESC" property="roleDesc" />
+		<result column="ENABLED" property="enabled" />
+		<result column="ISSYS" property="issys"/>
+		<result column="MODULE" property="module" />
+	</resultMap>
+	
+	<select id="selectSysRoles" parameterType="int" resultMap="sysRolesMap">
+		select * from tongde.SYS_ROLES where ROLE_ID = #{roleId}
+	</select>
+	<insert id="insertSysRoles" parameterType="SysRoles" keyColumn="ROLE_ID" keyProperty="roleId">
+		insert into
+		SYS_ROLES (ROLE_ID, ROLE_NAME,
+		ROLE_DESC)
+		values (
+		#{roleId}, #{roleName},
+		#{roleDesc}
+		)
+	</insert>
+	<delete id="deleteSysRoles" parameterType="String">
+		delete from tongde.SYS_ROLES where ROLE_ID = #{roleId}
+	</delete>
+	<update id="updateSysRoles" parameterType="SysRoles">
+		update tongde.SYS_ROLES set ROLE_DESC	= #{roleDesc}
+		where role_id=#{roleId}
+	</update>
+	<select id="selectAllRolesByUserId" parameterType="String" resultMap="sysRolesMap">
+		select * from tongde.SYS_ROLES where role_id not in 
+		(select distinct role_id from SYS_USERS_ROLES  where user_id=#{userId})
+	</select>
+	<select id="selectAllRoles" resultMap="sysRolesMap">
+		select *
+  from (SELECT ROWNUM as rn, A.* FROM (select * from tongde.SYS_ROLES
+          <where> 
+		<if test="roleName!= null" >       
+		 and ROLE_NAME like #{roleName}
+		 </if>
+		<if test="roleDesc!= null" >       
+		 AND ROLE_DESC like #{roleDesc}
+		 </if>
+		</where> ) A) b 
+  <![CDATA[
+   WHERE b.rn > #{limit} * (#{page} - 1)
+   AND b.rn <= #{limit} * #{page} 
+   ]]>
+
+	</select>
+	<select id="selectRoleById" parameterType="String" resultType="String">
+		select ROLE_NAME from SYS_ROLES  where ROLE_ID=#{roleName}
+	</select>
+	<select id="selectAllRolesCount" resultType="int">
+		select count(1) from tongde.SYS_ROLES 
+		 <where> 
+		<if test="roleName!= null" >       
+		 and ROLE_NAME=#{roleName} 
+		 </if>
+		<if test="roleDesc!= null" >       
+		 AND ROLE_DESC = #{roleDesc} 
+		 </if>
+		</where>
+	</select>
+	<insert id="insertRoleToUser">
+		insert into
+		SYS_USERS_ROLES (USER_ID,
+		ROLE_ID)
+		values (
+		#{userId}, #{roleId}
+		)
+	</insert>
+</mapper>

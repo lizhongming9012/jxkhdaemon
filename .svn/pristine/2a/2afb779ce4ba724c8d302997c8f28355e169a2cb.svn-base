@@ -1,0 +1,2 @@
+#xls.(class)=org.sdsgl.ytgs.service.ExcelViewBuilder
+jxkh.export.xls.(class)=org.jxkh.util.ExcelViewBuilder

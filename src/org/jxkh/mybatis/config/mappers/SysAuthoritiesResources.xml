@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为含有id中指示的方法的接口 -->
+<mapper namespace="org.jxkh.security.dao.SysAuthoritiesResourcesDao">
+	
+	<resultMap type="SysAuthoritiesResources" id="sysAuthoritiesResourcesMap">
+		<id column="ID" property="id" />
+		<result column="AUTHORITY_ID" property="authorityId" />
+		<result column="RESOURCE_ID" property="resourceId" />
+		<result column="ENABLED" property="enabled" javaType="Boolean"
+			jdbcType="CHAR" />
+	</resultMap>
+	
+	<insert id="insertSysAuthoritiesResources" parameterType="SysAuthorityResourceDto" useGeneratedKeys="true" keyProperty="id">
+		insert into tongde.SYS_AUTHORITIES_RESOURCES (AUTHORITY_ID,RESOURCE_ID) values (
+			#{authorityId}, #{resourceId}
+		)
+	</insert>
+	
+	<resultMap type="java.lang.String" id="SysResourceResultMap"> 
+        <result column="RESOURCE_STRING" property="resourceString"/> 
+    </resultMap> 
+    
+	<select id="getSysResourcesString" parameterType="java.lang.String" resultMap="SysResourceResultMap">
+		select b.resource_string from Sys_Authorities_Resources a, Sys_Resources b, 
+		Sys_authorities c where a.resource_id = b.resource_id and 
+		a.authority_id=c.authority_id and c.Authority_name=#{auth}
+	</select>
+	
+	<delete id="deleteSysAuthoritiesResources" parameterType="String">
+		delete from tongde.SYS_AUTHORITIES_RESOURCES where AUTHORITY_ID = #{authorityId}
+	</delete>
+	
+</mapper>

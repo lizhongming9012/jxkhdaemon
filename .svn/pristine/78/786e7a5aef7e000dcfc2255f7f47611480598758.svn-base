@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	
+	
+	<http pattern="/**/*.jpg" security="none" />
+	<http pattern="/**/*.png" security="none" />
+	<http pattern="/**/*.gif" security="none" />
+	<http pattern="/**/*.css" security="none" />
+	<http pattern="/**/*.js" security="none" />
+	<http pattern="/**/*.ico" security="none" />
+	<http pattern="/resource/**" security="none" />
+	<http pattern="/page" security="none" />
+
+	<http auto-config="true" access-denied-page="/admin/logfail">
+	   <intercept-url pattern="/admin/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	   <intercept-url pattern="/admin/refuse*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	   <intercept-url pattern="/admin*/**" access="AUTH_LOGIN" />
+		<form-login login-page="/admin/login" authentication-failure-url="/admin/login?error_msg=1"
+			
+			default-target-url="/admin/opendesktop"
+			 always-use-default-target='true'
+			/>
+		<!--  default-target-url="/admin/opendesktop"-->
+		
+	  <logout logout-success-url="/admin/logfail" />
+		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
+		
+		<!-- 同一个账号只允许一个在线   该配置用于统计在线用户使用，error-if-maximum-exceeded=true如用户已登录则提示不能重复登录-->
+		<session-management session-authentication-error-url="/admin/login?error_msg=2" >
+		  	<concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
+		</session-management>
+		
+		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理。 -->
+		<custom-filter ref="customFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+	<!-- 一个自定义的filter，必须包含authenticationManager, accessDecisionManager,securityMetadataSource三个属性。 
+		2013/11/08 -->
+	<beans:bean id="customFilter"
+		class="org.jxkh.security.CustomFilterSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="customAccessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="customInvocationSecurityMetadataSourceService" />
+	</beans:bean>
+
+	<!-- 注意能够为authentication-manager 设置alias别名 -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="customUserDetailsManager">
+			 <password-encoder ref="passwordEncoder"> 
+			<!--  <salt-source user-property="userPassword" />-->	
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。 2013/11/08 -->
+	<beans:bean id="customAccessDecisionManager"
+		class="org.jxkh.security.CustomAccessDecisionManager">
+	</beans:bean>
+
+	<!-- 用户详细信息管理：数据源、用户缓存（通过数据库管理用户、角色、权限、资源）。（新版本） 11/3/23 -->
+	<beans:bean id="customUserDetailsManager" class="org.jxkh.security.CustomUserDetailsService" />
+	<!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问。 2013/11/08 -->
+	<beans:bean id="customInvocationSecurityMetadataSourceService"
+		class="org.jxkh.security.CustomInvocationSecurityMetadataSourceService"
+		init-method="loadResourceDefine">
+	</beans:bean>
+	
+</beans:beans>

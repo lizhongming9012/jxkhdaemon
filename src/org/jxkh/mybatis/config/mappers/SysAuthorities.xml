@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为含有id中指示的方法的接口 -->
+<mapper namespace="org.jxkh.security.dao.SysAuthoritiesDao">
+
+	<resultMap type="SysAuthorities" id="sysAuthoritiesMap">
+		<id column="AUTHORITY_ID" property="authorityId" />
+		<result column="AUTHORITY_NAME" property="authorityName" />
+		<result column="AUTHORITY_DESC" property="authorityDesc" />
+		<result column="ENABLED" property="enabled" 
+			jdbcType="CHAR" />
+		<result column="ISSYS" property="issys" 
+			jdbcType="CHAR" />
+		<result column="MODULE" property="module" />
+	</resultMap>
+	<resultMap type="SysAuthorityResourceDto" id="sysAuthorityResourceMap">
+		<id column="AUTHORITY_ID" property="authorityId" />
+		<result column="AUTHORITY_NAME" property="authorityName" />
+		<result column="AUTHORITY_DESC" property="authorityDesc" />
+		<result column="RESOURCE_ID" property="resourceId"  />
+		<result column="RESOURCE_NAME" property="resourceName"  />
+		<result column="RESOURCE_STRING" property="resourceString"  />
+		<result column="MODULE" property="module" />
+		<result column="ISSYS" property="issys" />
+	</resultMap>
+	
+	<select id="selectSysAuthorities" parameterType="String"
+		resultType="String">
+		select AUTHORITY_ID from tongde.SYS_AUTHORITIES where AUTHORITY_ID =
+		#{authorityId}
+	</select>
+	<select id="selectSysAuthoritiesByModule" parameterType="String"
+		resultMap="sysAuthorityResourceMap">
+		select a.AUTHORITY_ID,a.AUTHORITY_NAME,a.AUTHORITY_DESC,b.RESOURCE_NAME,b.RESOURCE_ID,b.RESOURCE_STRING,b.MODULE,a.ISSYS from tongde.SYS_AUTHORITIES a ,tongde.SYS_RESOURCES b, tongde.SYS_AUTHORITIES_RESOURCES C
+		where a.AUTHORITY_ID = C.AUTHORITY_ID AND c.RESOURCE_ID = b.RESOURCE_ID AND a.MODULE =#{module}
+	</select>
+	
+	<resultMap type="java.lang.String" id="SysAuthoritiesResultMap">
+		<result column="AUTHORITY_NAME" property="authorityName" />
+	</resultMap>
+	
+	<select id="selectSysAuthoritiesNames" resultMap="SysAuthoritiesResultMap">
+		select
+		AUTHORITY_NAME from tongde.SYS_AUTHORITIES
+	</select>
+	<insert id="insertSysAuthorities" parameterType="SysAuthorityResourceDto">
+		insert into
+		tongde.SYS_AUTHORITIES (AUTHORITY_ID,
+		AUTHORITY_NAME,AUTHORITY_DESC,MODULE,ISSYS) values (
+		#{authorityId}, #{authorityName}, #{authorityDesc},#{module},#{issys}
+		)
+	</insert>
+	<delete id="deleteSysAuthorities" parameterType="String">
+		delete from
+		tongde.SYS_AUTHORITIES where AUTHORITY_ID = #{authorityId}
+	</delete>
+	<update id="updateSysAuthorities" parameterType="SysAuthorityResourceDto">
+		update
+		tongde.SYS_AUTHORITIES set AUTHORITY_DESC=	#{authorityDesc},ISSYS=#{issys}
+		where AUTHORITY_ID =#{authorityId}
+	</update>
+	<select id="getAllAuthority" resultMap="sysAuthoritiesMap">
+		select
+		AUTHORITY_ID,AUTHORITY_DESC from SYS_AUTHORITIES 
+		where  AUTHORITY_ID not in (select distinct AUTHORITY_ID from SYS_ROLES_AUTHORITIES  where ROLE_ID=#{roleId} )
+		
+	</select>
+</mapper>
